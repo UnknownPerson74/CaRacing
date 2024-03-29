@@ -1,9 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Lenovo\\Downloads\\CaRacing\\",
+  "WorkspaceRootPath": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|c:\\users\\lenovo\\downloads\\caracing\\assets\\scripts\\splashloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\carcustomizemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\carcustomizemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|c:\\users\\ahsan\\downloads\\caracing\\caracing\\assets\\scripts\\uigaragepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uigaragepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\custompanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\custompanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\splashloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\splashloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -14,20 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SplashLoader.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\Downloads\\CaRacing\\Assets\\Scripts\\SplashLoader.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SplashLoader.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\Downloads\\CaRacing\\Assets\\Scripts\\SplashLoader.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SplashLoader.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAZAAAA",
+              "DocumentIndex": 1,
+              "Title": "UIGaragePage.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\UIGaragePage.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIGaragePage.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\UIGaragePage.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIGaragePage.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAA6wAMAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-20T10:02:40.729Z",
+              "WhenOpened": "2024-03-29T10:19:29.77Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UIManager.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\UIManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIManager.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\UIManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIManager.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T10:13:20.164Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomPanel.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\CustomPanel.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CustomPanel.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\CustomPanel.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CustomPanel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T10:12:31.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CarCustomizeManager.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\CarCustomizeManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CarCustomizeManager.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\CarCustomizeManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CarCustomizeManager.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAwwC8AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-29T07:11:12.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SplashLoader.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\SplashLoader.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SplashLoader.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\SplashLoader.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SplashLoader.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-20T10:02:40.729Z"
             }
           ]
         }
