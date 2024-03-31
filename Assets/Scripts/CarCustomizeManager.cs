@@ -44,10 +44,14 @@ public class CarCustomizeManager : MonoBehaviour
         //    this.UpdateCustomization(this.SelectedItem.customiztionType, this.SelectedItem.id);
         //}
     }
-
+    public void BackFromPurchaseUI()
+    {
+        Singleton<UIManager>.Instance.ShowPage(UIScreens.FirstLand);
+    }
     public CustomPanel[] customPanels;
 
     public GameObject purchaseUI;
 
+    public GameObject previewParent;
     public GameObject backBtn;
 }
