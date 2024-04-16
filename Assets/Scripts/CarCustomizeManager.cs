@@ -18,11 +18,11 @@ public class CarCustomizeManager : MonoBehaviour
         {
             this.RemoveUnownedCustomizations();
         }
-        //this.custPanel = id - 1;
-        //for (int i = 0; i < this.customPanels.Length; i++)
-        //{
-        //    this.customPanels[i].SetActive(id == i);
-        //}
+        this.custPanel = id - 1;
+        for (int i = 0; i < this.customPanels.Length; i++)
+        {
+            this.customPanels[i].SetActive(id == i);
+        }
         this.PurchaseBtn = false;
     }
     private void RemoveUnownedCustomizations()
@@ -54,4 +54,10 @@ public class CarCustomizeManager : MonoBehaviour
 
     public GameObject previewParent;
     public GameObject backBtn;
+    private int custPanel;
+    public Sprite[] sp;
+    public Sprite[] rims;
+    public Sprite[] upgradeIcon;
+    public Sprite[] stickers;
+    public Sprite[] spCust;
 }

@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79cb9ecc0d4a6d428ab98a681a33897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeAreaShownRange: {x: -0.124814674, y: 9.848932}
+  timeAreaShownRange: {x: -0.12768151, y: 9.844244}
   trackScale: 1
   playRangeEnabled: 0
   windowTime: 0
   verticalScroll: 0
-  sequencerHeaderWidth: 247
+  sequencerHeaderWidth: 259
   m_TimeAreaPlayRange:
     start: 0
     end: 0
   m_Keys:
-  - {fileID: 6698913132422651137, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
-  - {fileID: 3264430889815574230, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
-  - {fileID: -2869990517257291032, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
-  - {fileID: -2860816844557550633, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
+  - {fileID: 3917669354897511980, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
+  - {fileID: -1038034220824847243, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
+  - {fileID: -4534058811345422399, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
+  - {fileID: 3278114045705742265, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
+  - {fileID: 5313895435655470377, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
   m_Vals:
   - collapsed: 0
     showMarkers: 1
@@ -137,6 +138,42 @@ MonoBehaviour:
     m_MarkerTimeStampsValues: 
   - collapsed: 0
     showMarkers: 1
+    showInlineCurves: 0
+    inlineAnimationCurveHeight: 100
+    lastInlineCurveDataID: -1
+    inlineCurvesState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    inlineCurvesShownAreaInsideMargins:
+      serializedVersion: 2
+      x: 1
+      y: 1
+      width: 1
+      height: 1
+    trackHeightExtension: 0
+    m_MarkerTimeStampsKeys: 
+    m_MarkerTimeStampsValues: 
+  - collapsed: 1
+    showMarkers: 0
     showInlineCurves: 0
     inlineAnimationCurveHeight: 100
     lastInlineCurveDataID: -1
