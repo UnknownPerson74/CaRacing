@@ -368,6 +368,7 @@
 "Assets/Scripts/LandingPage.cs"
 "Assets/Scripts/Singleton`1.cs"
 "Assets/Scripts/SplashLoader.cs"
+"Assets/Scripts/UICarUpgradeItem.cs"
 "Assets/Scripts/UIGaragePage.cs"
 "Assets/Scripts/UIManager.cs"
 "Assets/Scripts/UIScreens.cs"

@@ -52,6 +52,7 @@ public class CarCustomizeManager : MonoBehaviour
 
     public GameObject purchaseUI;
 
+    private UICarUpgradeItem[] upgrades;
     public GameObject previewParent;
     public GameObject backBtn;
     private int custPanel;
