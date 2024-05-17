@@ -60,16 +60,61 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.20f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GUI\FormatSecondsScript.cs" />
+    <Compile Include="Assets\Scripts\Vehicle\GizmoObject.cs" />
+    <Compile Include="Assets\Other\Skidmarks\WheelSkidmarks.cs" />
     <Compile Include="Assets\Scripts\LandingPage.cs" />
     <Compile Include="Assets\Scripts\Singleton`1.cs" />
+    <Compile Include="Assets\Scripts\GUI\MobileControl.cs" />
+    <Compile Include="Assets\Other\Skidmarks\Skidmarks Essentials\Skidmarks.cs" />
     <Compile Include="Assets\Scripts\CarCustomizeManager.cs" />
     <Compile Include="Assets\Scripts\SplashLoader.cs" />
+    <Compile Include="Assets\Scripts\AIController\AIVehicle.cs" />
+    <Compile Include="Assets\Scripts\AIController\AINode.cs" />
+    <Compile Include="Assets\Scripts\GUI\GameUI.cs" />
     <Compile Include="Assets\Scripts\UIGaragePage.cs" />
+    <Compile Include="Assets\Scripts\Vehicle\VehicleCamera.cs" />
+    <Compile Include="Assets\Scripts\AIController\AIControl.cs" />
     <Compile Include="Assets\Scripts\CameraOrbit.cs" />
+    <Compile Include="Assets\Scripts\GUI\PlayerPrefsX.cs" />
+    <Compile Include="Assets\Scripts\GUI\RunButton.cs" />
     <Compile Include="Assets\Scripts\UICarUpgradeItem.cs" />
     <Compile Include="Assets\Scripts\UIScreens.cs" />
+    <Compile Include="Assets\Scripts\GUI\MiniMap.cs" />
+    <Compile Include="Assets\Scripts\AIController\AIPath.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\CustomPanel.cs" />
+    <Compile Include="Assets\Scripts\GUI\OpenURL.cs" />
+    <Compile Include="Assets\Scripts\Vehicle\VehicleDamage.cs" />
+    <Compile Include="Assets\Scripts\GUI\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Vehicle\VehicleControl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Other\Lighting Effects\Shaders\Legacy\Legacy_Specular_Normal.shader" />
+    <None Include="Assets\Models\TrackObjects\Object1\Textures\TextShader.shader" />
+    <None Include="Assets\Other\ProjectorShadow\Sources\Shaders\ProjectorLight.shader" />
+    <None Include="Assets\Other\ProjectorShadow\Sources\Shaders\ProjectorMultiply.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Alpha-VertexLit-DoubleSided.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Other\ReflectionBlurFresnel.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Terrain\Fresnel\4Splat_Unity5_Fresnel.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Legacy\Legacy_Diffuse.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Lighting\Flare_Color.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Legacy\Mobile_Specular_CubeMap_Color.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Mobile\Mobile_Detail.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\DoubleSided.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Mobile\Mobile_Specular.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Terrain\4Splat_Unity5.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Legacy\Legacy_Detail.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Legacy\Legacy_Specular.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Lighting\Light_Shaft.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\MirrorReflection.shader" />
+    <None Include="Assets\Other\ProjectorShadow\Sources\Shaders\Projector Light.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Other\TransparentRef.shader" />
+    <None Include="Assets\Other\Lighting Effects\Textures\Licence.txt" />
+    <None Include="Assets\Other\ProjectorShadow\Sources\Shaders\Projector Multiply.shader" />
+    <None Include="Assets\Other\Skidmarks\Skidmarks Essentials\Skidmarks.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Mobile\Mobile_Specular_Detail.shader" />
+    <None Include="Assets\Other\Lighting Effects\Shaders\Legacy\Legacy_Specular_Detail.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1034,6 +1079,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{496E50AE-2022-DFD3-F47F-E403A4ADC2EF}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
