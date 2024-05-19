@@ -61,14 +61,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GUI\FormatSecondsScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerCustomizeData.cs" />
     <Compile Include="Assets\Scripts\Vehicle\GizmoObject.cs" />
     <Compile Include="Assets\Other\Skidmarks\WheelSkidmarks.cs" />
     <Compile Include="Assets\Scripts\LandingPage.cs" />
+    <Compile Include="Assets\Scripts\GameUtils.cs" />
     <Compile Include="Assets\Scripts\Singleton`1.cs" />
+    <Compile Include="Assets\Scripts\CarID.cs" />
+    <Compile Include="Assets\Scripts\CarData.cs" />
     <Compile Include="Assets\Scripts\GUI\MobileControl.cs" />
     <Compile Include="Assets\Other\Skidmarks\Skidmarks Essentials\Skidmarks.cs" />
     <Compile Include="Assets\Scripts\CarCustomizeManager.cs" />
     <Compile Include="Assets\Scripts\SplashLoader.cs" />
+    <Compile Include="Assets\Scripts\GamePlay.cs" />
     <Compile Include="Assets\Scripts\AIController\AIVehicle.cs" />
     <Compile Include="Assets\Scripts\AIController\AINode.cs" />
     <Compile Include="Assets\Scripts\GUI\GameUI.cs" />
@@ -84,6 +89,7 @@
     <Compile Include="Assets\Scripts\AIController\AIPath.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\CustomPanel.cs" />
+    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\GUI\OpenURL.cs" />
     <Compile Include="Assets\Scripts\Vehicle\VehicleDamage.cs" />
     <Compile Include="Assets\Scripts\GUI\MainMenu.cs" />

@@ -3,6 +3,56 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIGaragePage : MonoBehaviour
 {
+    public void MoveLeftRightGarage(bool isNext)
+	{
+		//Singleton<SoundManager>.Instance.Click();
+		if (isNext)
+		{
+			if (this.CurrCarID < Singleton<GamePlay>.Instance.playerCars.Length - 1)
+			{
+				this.CurrCarID++;
+			}
+			else
+			{
+				this.CurrCarID = 0;
+			}
+		}
+		else if (this.CurrCarID > 0)
+		{
+			this.CurrCarID--;
+		}
+		else
+		{
+			this.CurrCarID = Singleton<GamePlay>.Instance.playerCars.Length - 1;
+		}
+	}
+    public int CurrCarID
+    {
+        get
+        {
+            return this._carID;
+        }
+        set
+        {
+            this._carID = value;
+            this.ChangeSelectedCar();
+        }
+    }
+    public void ChangeSelectedCar()
+    {
+        this.carCustomize.Refresh();
+        this.priceTxt.text = GameUtils.GetValueFormated(this.SelectedCar.cost);
+        //PlayerCustomizeData playerData = PlayerDataPersistant.Instance.GetPlayerData(this.SelectedCar.carID);
+        //this.carCustomize.SetActive(playerData.owned);
+        //this.purchaseUI.SetActive(!playerData.owned);
+    }
+    public CarData SelectedCar
+    {
+        get
+        {
+            return Singleton<GamePlay>.Instance.playerCars[this.CurrCarID];
+        }
+    }
     public void SetActive(bool ui, bool state)
     {
         base.gameObject.SetActive(state);
@@ -42,4 +92,7 @@ public class UIGaragePage : MonoBehaviour
     public Transform landTrans;
     private float et;
     public Transform garageTrans;
+    private int _carID;
+
+    public Text priceTxt;
 }

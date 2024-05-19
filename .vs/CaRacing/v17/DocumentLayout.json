@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|c:\\users\\ahsan\\downloads\\caracing\\caracing\\assets\\scripts\\uicarupgradeitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uicarupgradeitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|c:\\users\\ahsan\\downloads\\caracing\\caracing\\assets\\scripts\\uigaragepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uigaragepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|c:\\users\\ahsan\\downloads\\caracing\\caracing\\assets\\scripts\\carcustomizemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\gameplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gameplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\carcustomizemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\carcustomizemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\custompanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\custompanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\gameutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gameutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,44 +30,69 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UICarUpgradeItem.cs",
-              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\UICarUpgradeItem.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\UICarUpgradeItem.cs",
-              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\UICarUpgradeItem.cs",
-              "RelativeToolTip": "Assets\\Scripts\\UICarUpgradeItem.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-25T19:22:45.855Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CustomPanel.cs",
-              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\CustomPanel.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\CustomPanel.cs",
-              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\CustomPanel.cs",
-              "RelativeToolTip": "Assets\\Scripts\\CustomPanel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-16T18:03:46.62Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "CarCustomizeManager.cs",
               "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\CarCustomizeManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CarCustomizeManager.cs",
               "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\CarCustomizeManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\CarCustomizeManager.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAwwDYAAAAoAAAA",
+              "ViewState": "AQIAAFAAAAAAAAAAAAA1wGAAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-29T07:11:12.952Z",
+              "WhenOpened": "2024-05-19T13:13:07.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GameUtils.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\GameUtils.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GameUtils.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\GameUtils.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GameUtils.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-19T13:10:15.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlayerMovement.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\PlayerMovement.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerMovement.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\PlayerMovement.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerMovement.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-19T13:05:57.182Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GamePlay.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\GamePlay.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GamePlay.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\GamePlay.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GamePlay.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-19T13:01:02.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UIGaragePage.cs",
+              "DocumentMoniker": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\UIGaragePage.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIGaragePage.cs",
+              "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\UIGaragePage.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIGaragePage.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-19T12:46:21.703Z",
               "EditorCaption": ""
             }
           ]
