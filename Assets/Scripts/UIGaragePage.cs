@@ -1,31 +1,60 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static MainMenu;
 public class UIGaragePage : MonoBehaviour
 {
-    public void MoveLeftRightGarage(bool isNext)
-	{
-		//Singleton<SoundManager>.Instance.Click();
-		if (isNext)
-		{
-			if (this.CurrCarID < Singleton<GamePlay>.Instance.playerCars.Length - 1)
-			{
-				this.CurrCarID++;
-			}
-			else
-			{
-				this.CurrCarID = 0;
-			}
-		}
-		else if (this.CurrCarID > 0)
-		{
-			this.CurrCarID--;
-		}
-		else
-		{
-			this.CurrCarID = Singleton<GamePlay>.Instance.playerCars.Length - 1;
-		}
-	}
+
+    private int currentVehicleNumber = 0;
+    public VehicleSetting[] vehicleSetting;
+
+    private VehicleSetting currentVehicle;
+    public void NextVehicle()
+    {
+        //if (menuGUI.wheelColor)
+        //{ 
+        //    menuGUI.wheelColor.gameObject.SetActive(false);
+        //}
+
+        currentVehicleNumber++;
+        currentVehicleNumber = (int)Mathf.Repeat(currentVehicleNumber, vehicleSetting.Length);
+
+        foreach (VehicleSetting VSetting in vehicleSetting)
+        {
+
+            if (VSetting == vehicleSetting[currentVehicleNumber])
+            {
+                VSetting.vehicle.SetActive(true);
+                currentVehicle = VSetting;
+            }
+            else
+            {
+                VSetting.vehicle.SetActive(false);
+
+            }
+        }
+    }
+
+
+    public void PreviousVehicle()
+    {
+
+        currentVehicleNumber--;
+        currentVehicleNumber = (int)Mathf.Repeat(currentVehicleNumber, vehicleSetting.Length);
+
+        foreach (VehicleSetting VSetting in vehicleSetting)
+        {
+            if (VSetting == vehicleSetting[currentVehicleNumber])
+            {
+                VSetting.vehicle.SetActive(true);
+                currentVehicle = VSetting;
+            }
+            else
+            {
+                VSetting.vehicle.SetActive(false);
+            }
+        }
+    }
     public int CurrCarID
     {
         get
