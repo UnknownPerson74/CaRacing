@@ -298,7 +298,10 @@ public class MainMenu : MonoBehaviour
 
     public void NextVehicle()
     {
-        if (menuGUI.wheelColor) { menuGUI.wheelColor.gameObject.SetActive(false); }
+        //if (menuGUI.wheelColor)
+        //{ 
+        //    menuGUI.wheelColor.gameObject.SetActive(false);
+        //}
 
         currentVehicleNumber++;
         currentVehicleNumber = (int)Mathf.Repeat(currentVehicleNumber, vehicleSetting.Length);

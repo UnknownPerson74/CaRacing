@@ -12,18 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29f24ce05c3da1246bc404f46cfb04e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Sequences:
-  - rid: 1151002898686017538
+  m_Sequences: []
   references:
     version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 1151002898686017538
-      type: {class: SequenceNode, ns: UnityEditor.Sequences, asm: Unity.Sequences.Editor}
-      data:
-        m_Timeline: {fileID: 11400000, guid: 5ec069a42528a1d41a8423612cc8b0ed, type: 2}
-        m_Parent:
-          rid: -2
-        m_Children: []
-        m_EditorialClipAsset: {fileID: 0}
+    RefIds: []
