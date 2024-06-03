@@ -7,7 +7,6 @@ public enum Panels { MainMenu = 0, SelectVehicle = 1, SelectLevel = 2, Settings 
 public class MainMenu : MonoBehaviour
 {
     private int gameScore { get; set; }
-
     public float cameraRotateSpeed = 5;
     public Animator FadeBackGround;
 
@@ -19,8 +18,7 @@ public class MainMenu : MonoBehaviour
     public MenuGUI menuGUI;
     public VehicleSetting[] vehicleSetting;
     public LevelSetting[] levelSetting;
-
-
+  
     [System.Serializable]
     public class MenuGUI
     {
@@ -39,12 +37,12 @@ public class MainMenu : MonoBehaviour
         public Toggle vibrateToggle;
         public Toggle ButtonMode, AccelMode;
 
-        public Image wheelColor, smokeColor;
+        public Image wheelColor, smokeColor,upgradeColor;
         public Image loadingBar;
 
         public GameObject loading;
         public GameObject customizeVehicle;
-        public GameObject buyNewVehicle;
+        public GameObject buyNewVehicle,Colors,Upgrade;
     }
 
     [System.Serializable]
@@ -163,13 +161,33 @@ public class MainMenu : MonoBehaviour
     }
 
 
+    public void ActiveUpgradeColor(Image activeImage)
+    {
+        randomColorActive = false;
+
+        activeImage.gameObject.SetActive(true);
+        menuGUI.Upgrade.gameObject.SetActive(true);
+
+        menuGUI.upgradeColor = activeImage;
+        menuGUI.smokeColor.gameObject.SetActive(false);
+        menuGUI.wheelColor.gameObject.SetActive(false);
+        menuGUI.Colors.gameObject.SetActive(false);
+
+    }
+
+    
     public void ActiveWheelColor(Image activeImage)
     {
         randomColorActive = false;
 
         activeImage.gameObject.SetActive(true);
+        menuGUI.Colors.gameObject.SetActive(true);
+
         menuGUI.wheelColor = activeImage;
         menuGUI.smokeColor.gameObject.SetActive(false);
+        menuGUI.upgradeColor.gameObject.SetActive(false);
+        menuGUI.Upgrade.gameObject.SetActive(false);
+
     }
 
 
@@ -178,8 +196,13 @@ public class MainMenu : MonoBehaviour
         randomColorActive = false;
 
         activeImage.gameObject.SetActive(true);
+        menuGUI.Colors.gameObject.SetActive(true);
+
         menuGUI.smokeColor = activeImage;
         menuGUI.wheelColor.gameObject.SetActive(false);
+        menuGUI.upgradeColor.gameObject.SetActive(false);
+        menuGUI.Upgrade.gameObject.SetActive(false);
+
     }
 
 
@@ -642,8 +665,6 @@ public class MainMenu : MonoBehaviour
 
     void Update()
     {
-
-
         if (sceneLoadingOperation != null)
         {
             menuGUI.loadingBar.fillAmount = Mathf.MoveTowards(menuGUI.loadingBar.fillAmount, sceneLoadingOperation.progress + 0.2f, Time.deltaTime * 0.5f);
@@ -662,7 +683,6 @@ public class MainMenu : MonoBehaviour
         {
             vehicleSetting[currentVehicleNumber].wheelSmokes.SetActive(false);
         }
-
 
 
         menuGUI.VehicleSpeed.value = vehicleSetting[currentVehicleNumber].vehiclePower.speed / 100.0f;

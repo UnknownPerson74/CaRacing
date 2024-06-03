@@ -6,7 +6,7 @@ public class AIVehicle : MonoBehaviour
 {
 
     public float carRestTime = 5.0f;
-
+    private GameUI GameUI;
     public float forwardSpeed = 1.0f;
     public float steerSpeed = 1.0f;
     public float nextNodeDistance = 5;

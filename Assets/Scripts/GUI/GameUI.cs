@@ -23,8 +23,8 @@ public class GameUI : MonoBehaviour
     public int driftAmount = 0;
     [HideInInspector]
     public float penaltyTime = 0.0f;
-    [HideInInspector]
-    public bool gameStarted, gamePaused, gameRest, gameFinished = false;
+   [HideInInspector]
+    public bool gameStarted=false, gamePaused, gameRest, gameFinished = false;
     [HideInInspector]
     public int racePrize, totalPrize = 0;
 
