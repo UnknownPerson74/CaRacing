@@ -377,6 +377,7 @@
 "Assets/Scripts/GUI/OpenURL.cs"
 "Assets/Scripts/GUI/PlayerPrefsX.cs"
 "Assets/Scripts/GUI/RunButton.cs"
+"Assets/Scripts/GUI/UICarUpgradeItem.cs"
 "Assets/Scripts/Vehicle/GizmoObject.cs"
 "Assets/Scripts/Vehicle/VehicleCamera.cs"
 "Assets/Scripts/Vehicle/VehicleControl.cs"

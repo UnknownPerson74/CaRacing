@@ -1,12 +1,33 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum Panels { MainMenu = 0, SelectVehicle = 1, SelectLevel = 2, Settings = 3 }
+public enum Panels { MainMenu = 0, SelectVehicle = 1, CustomizeVehicle = 2, SelectLevel = 3, Settings = 4 }
 
 public class MainMenu : MonoBehaviour
 {
-    private int gameScore { get; set; }
+    private static MainMenu instance;
+    public MainMenu()
+    {
+        instance = this;
+    }
+
+    public static MainMenu Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+               instance = new MainMenu();
+            }
+            return MainMenu.instance;
+        }
+    }
+
+    private int _coins = 10000;
     public float cameraRotateSpeed = 5;
     public Animator FadeBackGround;
 
@@ -17,8 +38,23 @@ public class MainMenu : MonoBehaviour
     public MenuPanels menuPanels;
     public MenuGUI menuGUI;
     public VehicleSetting[] vehicleSetting;
+    private UICarUpgradeItem[] UICarUpgradeItems;
+
     public LevelSetting[] levelSetting;
-  
+
+    public int Coins
+    {
+        get
+        {
+            return this._coins;
+        }
+        set
+        {
+            this._coins = value;
+           UpdateCoinsCount();
+        }
+    }
+
     [System.Serializable]
     public class MenuGUI
     {
@@ -37,12 +73,12 @@ public class MainMenu : MonoBehaviour
         public Toggle vibrateToggle;
         public Toggle ButtonMode, AccelMode;
 
-        public Image wheelColor, smokeColor,upgradeColor;
+        public Image wheelColor, smokeColor, upgradeColor;
         public Image loadingBar;
 
         public GameObject loading;
         public GameObject customizeVehicle;
-        public GameObject buyNewVehicle,Colors,Upgrade;
+        public GameObject buyNewVehicle, Colors, Upgrade;
     }
 
     [System.Serializable]
@@ -50,6 +86,7 @@ public class MainMenu : MonoBehaviour
     {
         public GameObject MainMenu;
         public GameObject SelectVehicle;
+        public GameObject CustomizeVehicle;
         public GameObject SelectLevel;
         public GameObject EnoughMoney;
         public GameObject Settings;
@@ -79,6 +116,9 @@ public class MainMenu : MonoBehaviour
             public float speed = 80;
             public float braking = 1000;
             public float nitro = 10;
+            public float Maxspeed = 80;
+            public float Maxbraking = 1000;
+            public float Maxnitro = 10;
         }
     }
 
@@ -106,6 +146,7 @@ public class MainMenu : MonoBehaviour
     private float x, y = 0;
 
     private VehicleSetting currentVehicle;
+    private UICarUpgradeItem UICarUpgradeitem;
 
     private int currentVehicleNumber = 0;
     private int currentLevelNumber = 0;
@@ -117,7 +158,283 @@ public class MainMenu : MonoBehaviour
     private float menuLoadTime = 0.0f;
     private AsyncOperation sceneLoadingOperation = null;
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void UpdateCoinsCount()
+    {
+        string valueFormated = UICarUpgradeItem.GetValueFormated(Coins);
+            menuGUI.GameScore.text = valueFormated;
+    }
+    void Awake()
+    {
 
+        AudioListener.pause = false;
+        Time.timeScale = 1.0f;
+
+
+        menuGUI.vibrateToggle.isOn = (PlayerPrefs.GetInt("VibrationActive") == 0) ? true : false;
+        this.UICarUpgradeItems = menuGUI.Upgrade.GetComponentsInChildren<UICarUpgradeItem>();
+
+
+        CurrentPanel(0);
+
+        if (PlayerPrefs.GetInt("QualitySettings") == 0)
+        {
+            PlayerPrefs.SetInt("QualitySettings", 4);
+            QualitySettings.SetQualityLevel(3, true);
+        }
+        else
+        {
+            QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("QualitySettings") - 1, true);
+        }
+
+        if (PlayerPrefs.GetFloat("Sensitivity") == 0.0f)
+        {
+            menuGUI.sensitivity.value = 1.0f;
+            PlayerPrefs.SetFloat("Sensitivity", 1.0f);
+        }
+        else
+        {
+            menuGUI.sensitivity.value = PlayerPrefs.GetFloat("Sensitivity");
+        }
+
+
+        switch (PlayerPrefs.GetString("ControlMode"))
+        {
+            case "":
+                menuGUI.ButtonMode.isOn = true;
+                break;
+            case "Buttons":
+                menuGUI.ButtonMode.isOn = true;
+                break;
+            case "Accel":
+                menuGUI.AccelMode.isOn = true;
+                break;
+        }
+
+
+        currentLevelNumber = PlayerPrefs.GetInt("CurrentLevelNumber");
+
+        for (int lvls = 0; lvls < levelSetting.Length; lvls++)
+        {
+            if (lvls <= PlayerPrefs.GetInt("CurrentLevelUnlocked"))
+                levelSetting[lvls].locked = false;
+
+        }
+
+
+        currentLevel(currentLevelNumber);
+
+
+        switch (PlayerPrefs.GetString("ControlMode"))
+        {
+            case "":
+                PlayerPrefs.SetString("ControlMode", "Buttons");
+                menuGUI.ButtonMode.isOn = true;
+                break;
+            case "Buttons":
+                menuGUI.ButtonMode.isOn = true;
+                break;
+            case "Accel":
+                menuGUI.AccelMode.isOn = true;
+                break;
+        }
+
+
+        PlayerPrefs.SetInt("BoughtVehicle0", 1);
+
+        SaveGameData();
+        //audio and music Toggle
+        menuGUI.audio.isOn = (PlayerPrefs.GetInt("AudioActive") == 0) ? true : false;
+        AudioListener.volume = (PlayerPrefs.GetInt("AudioActive") == 0) ? 1.0f : 0.0f;
+
+        menuGUI.music.isOn = (PlayerPrefs.GetInt("MusicActive") == 0) ? true : false;
+        menuMusic.mute = (PlayerPrefs.GetInt("MusicActive") == 0) ? false : true;
+
+        currentVehicleNumber = PlayerPrefs.GetInt("CurrentVehicle");
+        currentVehicle = vehicleSetting[currentVehicleNumber];
+
+        int i = 0;
+
+        foreach (VehicleSetting VSetting in vehicleSetting)
+        {
+
+            if (PlayerPrefsX.GetColor("VehicleWheelsColor" + i) == Color.clear)
+            {
+                vehicleSetting[i].ringMat.SetColor("_DiffuseColor", Color.white);
+            }
+            else
+            {
+                vehicleSetting[i].ringMat.SetColor("_DiffuseColor", PlayerPrefsX.GetColor("VehicleWheelsColor" + i));
+            }
+
+
+
+            if (PlayerPrefsX.GetColor("VehicleSmokeColor" + i) == Color.clear)
+            {
+                vehicleSetting[i].smokeMat.SetColor("_TintColor", new Color(0.8f, 0.8f, 0.8f, 0.2f));
+            }
+            else
+            {
+                vehicleSetting[i].smokeMat.SetColor("_TintColor", PlayerPrefsX.GetColor("VehicleSmokeColor" + i));
+            }
+
+
+
+            if (PlayerPrefs.GetInt("BoughtVehicle" + i.ToString()) == 1)
+            {
+                VSetting.Bought = true;
+
+                if (PlayerPrefs.GetInt("GameScore") == 0)
+                {
+                    PlayerPrefs.SetInt("GameScore", Coins);
+                }
+                else
+                {
+                    Coins = PlayerPrefs.GetInt("GameScore");
+                }
+            }
+
+
+            if (VSetting == vehicleSetting[currentVehicleNumber])
+            {
+                VSetting.vehicle.SetActive(true);
+                currentVehicle = VSetting;
+            }
+            else
+            {
+                VSetting.vehicle.SetActive(false);
+            }
+
+            i++;
+        }
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void SaveGameData()
+    {
+        //for (int i = 0; i < vehicleSetting.Length; i++)
+        //{
+        //    string str = i.ToString();
+        //    PlayerPrefs.SetFloat(str + "_CURRENT_SPEED", vehicleSetting[i].vehiclePower.speed);
+        //    PlayerPrefs.SetFloat(str + "_CURRENT_BRAKING", vehicleSetting[i].vehiclePower.braking);
+        //    PlayerPrefs.SetFloat(str + "_CURRENT_NITRO", vehicleSetting[i].vehiclePower.nitro);
+        //}
+        //PlayerPrefs.Save();
+    }
+    void Update()
+    {
+        if (sceneLoadingOperation != null)
+        {
+            menuGUI.loadingBar.fillAmount = Mathf.MoveTowards(menuGUI.loadingBar.fillAmount, sceneLoadingOperation.progress + 0.2f, Time.deltaTime * 0.5f);
+
+            if (menuGUI.loadingBar.fillAmount > sceneLoadingOperation.progress)
+                sceneLoadingOperation.allowSceneActivation = true;
+        }
+
+
+        if (menuGUI.smokeColor.gameObject.activeSelf || randomColorActive)
+        {
+            vehicleSetting[currentVehicleNumber].rearWheels.Rotate(1000 * Time.deltaTime, 0, 0);
+            vehicleSetting[currentVehicleNumber].wheelSmokes.SetActive(true);
+        }
+        else
+        {
+            vehicleSetting[currentVehicleNumber].wheelSmokes.SetActive(false);
+        }
+
+
+        menuGUI.VehicleSpeed.value = PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_SPEED") / 100.0f; ;
+        menuGUI.VehicleBraking.value = PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_BRAKING") / 100.0f; ;
+        menuGUI.VehicleNitro.value = PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_NITRO") / 100.0f; ;
+        menuGUI.GameScore.text = Coins.ToString();
+
+
+        this.UICarUpgradeItems[0].SetProgress(PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_SPEED"), vehicleSetting[currentVehicleNumber].vehiclePower.Maxspeed);
+        this.UICarUpgradeItems[1].SetProgress(PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_BRAKING"), vehicleSetting[currentVehicleNumber].vehiclePower.Maxbraking);
+        this.UICarUpgradeItems[2].SetProgress(PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_NITRO"), vehicleSetting[currentVehicleNumber].vehiclePower.Maxnitro);
+
+        if (vehicleSetting[currentVehicleNumber].Bought)
+        {
+            menuGUI.customizeVehicle.SetActive(true);
+            menuGUI.buyNewVehicle.SetActive(false);
+
+            menuGUI.VehicleName.text = vehicleSetting[currentVehicleNumber].name;
+            menuGUI.VehiclePrice.text = "BOUGHT";
+            PlayerPrefs.SetInt("CurrentVehicle", currentVehicleNumber);
+        }
+        else
+        {
+            menuGUI.customizeVehicle.SetActive(false);
+            menuGUI.buyNewVehicle.SetActive(true);
+
+            menuGUI.VehicleName.text = vehicleSetting[currentVehicleNumber].name;
+            menuGUI.VehiclePrice.text = "COST: " + vehicleSetting[currentVehicleNumber].price.ToString();
+        }
+
+#if UNITY_STANDALONE || UNITY_WEBGL || UNITY_EDITOR
+
+        if (Input.GetMouseButton(0) && activePanel != Panels.SelectLevel)
+        {
+            x = Mathf.Lerp(x, Mathf.Clamp(Input.GetAxis("Mouse X"), -2, 2) * cameraRotateSpeed, Time.deltaTime * 5.0f);
+            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 50, 60);
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 50, Time.deltaTime);
+        }
+        else
+        {
+            x = Mathf.Lerp(x, cameraRotateSpeed * 0.01f, Time.deltaTime * 5.0f);
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, Time.deltaTime);
+        }
+
+
+#elif UNITY_ANDROID||UNITY_IOS
+
+
+
+        if (Input.touchCount == 1&& activePanel!=Panels.SelectLevel)
+        {
+            switch (Input.GetTouch(0).phase)
+            {
+                case TouchPhase.Moved:
+                    x = Mathf.Lerp(x, Mathf.Clamp(Input.GetTouch(0).deltaPosition.x, -2, 2) * cameraRotateSpeed, Time.deltaTime*3.0f);
+                    Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 50, 60);
+                    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 50, Time.deltaTime);
+                    break;
+            }
+
+        }
+        else {
+            x = Mathf.Lerp(x, cameraRotateSpeed * 0.02f, Time.deltaTime*3.0f);
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, Time.deltaTime);
+        }
+
+#endif
+        transform.RotateAround(vehicleRoot.position, Vector3.up, x);
+
+    }
+
+    public void SetCarUpgradeValue(int upgradeID, float val)
+    {
+        switch (upgradeID)
+        {
+            case 0:
+                this.vehicleSetting[currentVehicleNumber].vehiclePower.speed = val;
+                PlayerPrefs.SetFloat(currentVehicleNumber + "_CURRENT_SPEED", val);
+                break;
+
+            case 1:
+                this.vehicleSetting[currentVehicleNumber].vehiclePower.braking = val;
+                PlayerPrefs.SetFloat(currentVehicleNumber + "_CURRENT_BRAKING", val);
+                break;
+            case 2:
+                this.vehicleSetting[currentVehicleNumber].vehiclePower.nitro = val;
+                PlayerPrefs.SetFloat(currentVehicleNumber + "_CURRENT_NITRO", val);
+                break;
+
+        }
+        PlayerPrefs.Save();
+    }
     //ControlMode//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void ControlModeButtons(Toggle value)
@@ -175,7 +492,7 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    
+
     public void ActiveWheelColor(Image activeImage)
     {
         randomColorActive = false;
@@ -218,9 +535,11 @@ public class MainMenu : MonoBehaviour
     {
 
         randomColorActive = true;
-
+        menuGUI.Colors.gameObject.SetActive(true);
         menuGUI.wheelColor.gameObject.SetActive(false);
         menuGUI.smokeColor.gameObject.SetActive(false);
+        menuGUI.upgradeColor.gameObject.SetActive(false);
+        menuGUI.Upgrade.gameObject.SetActive(false);
 
         vehicleSetting[currentVehicleNumber].ringMat.SetColor("_Color", new Color(Random.Range(0.0f, 1.1f), Random.Range(0.0f, 1.1f), Random.Range(0.0f, 1.1f)));
         vehicleSetting[currentVehicleNumber].smokeMat.SetColor("_TintColor", new Color(Random.Range(0.0f, 1.1f), Random.Range(0.0f, 1.1f), Random.Range(0.0f, 1.1f), 0.2f));
@@ -276,6 +595,7 @@ public class MainMenu : MonoBehaviour
             case Panels.MainMenu:
                 menuPanels.MainMenu.SetActive(true);
                 menuPanels.SelectVehicle.SetActive(false);
+                menuPanels.CustomizeVehicle.SetActive(false);
                 menuPanels.SelectLevel.SetActive(false);
                 if (menuGUI.wheelColor) menuGUI.wheelColor.gameObject.SetActive(true);
 
@@ -283,16 +603,25 @@ public class MainMenu : MonoBehaviour
             case Panels.SelectVehicle:
                 menuPanels.MainMenu.gameObject.SetActive(false);
                 menuPanels.SelectVehicle.SetActive(true);
+                menuPanels.CustomizeVehicle.SetActive(false);
+                menuPanels.SelectLevel.SetActive(false);
+                break;
+            case Panels.CustomizeVehicle:
+                menuPanels.MainMenu.gameObject.SetActive(false);
+                menuPanels.SelectVehicle.SetActive(true);
+                menuPanels.CustomizeVehicle.SetActive(true);
                 menuPanels.SelectLevel.SetActive(false);
                 break;
             case Panels.SelectLevel:
                 menuPanels.MainMenu.SetActive(false);
                 menuPanels.SelectVehicle.SetActive(false);
+                menuPanels.CustomizeVehicle.SetActive(false);
                 menuPanels.SelectLevel.SetActive(true);
                 break;
             case Panels.Settings:
                 menuPanels.MainMenu.SetActive(false);
                 menuPanels.SelectVehicle.SetActive(false);
+                menuPanels.CustomizeVehicle.SetActive(false);
                 menuPanels.SelectLevel.SetActive(false);
                 break;
         }
@@ -303,12 +632,12 @@ public class MainMenu : MonoBehaviour
 
     public void BuyVehicle()
     {
-        if ((gameScore >= vehicleSetting[currentVehicleNumber].price) && !vehicleSetting[currentVehicleNumber].Bought)
+        if ((Coins >= vehicleSetting[currentVehicleNumber].price) && !vehicleSetting[currentVehicleNumber].Bought)
         {
             PlayerPrefs.SetInt("BoughtVehicle" + currentVehicleNumber.ToString(), 1);
-            gameScore -= vehicleSetting[currentVehicleNumber].price;
-            if (gameScore <= 0) { gameScore = 1; }
-            PlayerPrefs.SetInt("GameScore", gameScore);
+            Coins -= vehicleSetting[currentVehicleNumber].price;
+            if (Coins <= 0) { Coins = 1; }
+            PlayerPrefs.SetInt("GameScore", Coins);
             vehicleSetting[currentVehicleNumber].Bought = true;
         }
         else
@@ -321,10 +650,10 @@ public class MainMenu : MonoBehaviour
 
     public void NextVehicle()
     {
-        //if (menuGUI.wheelColor)
-        //{ 
-        //    menuGUI.wheelColor.gameObject.SetActive(false);
-        //}
+        if (menuGUI.wheelColor)
+        {
+            menuGUI.wheelColor.gameObject.SetActive(false);
+        }
 
         currentVehicleNumber++;
         currentVehicleNumber = (int)Mathf.Repeat(currentVehicleNumber, vehicleSetting.Length);
@@ -414,7 +743,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         currentVehicleNumber = 0;
-        Application.LoadLevel(0);
+        SceneManager.LoadSceneAsync(0);
 
         foreach (Material mat in allRestMaterials)
             mat.SetColor("_Color", new Color(0.7f, 0.7f, 0.7f));
@@ -445,7 +774,7 @@ public class MainMenu : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
 
-        sceneLoadingOperation = Application.LoadLevelAsync(currentLevelNumber + 1);
+        sceneLoadingOperation = SceneManager.LoadSceneAsync(currentLevelNumber + 1);
         sceneLoadingOperation.allowSceneActivation = false;
 
         while (!sceneLoadingOperation.isDone || sceneLoadingOperation.progress < 0.9f)
@@ -507,250 +836,6 @@ public class MainMenu : MonoBehaviour
                 }
             }
         }
-    }
-
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    void Awake()
-    {
-
-        AudioListener.pause = false;
-        Time.timeScale = 1.0f;
-
-
-        menuGUI.vibrateToggle.isOn = (PlayerPrefs.GetInt("VibrationActive") == 0) ? true : false;
-
-
-        gameScore = 999999;
-        CurrentPanel(0);
-
-        if (PlayerPrefs.GetInt("QualitySettings") == 0)
-        {
-            PlayerPrefs.SetInt("QualitySettings", 4);
-            QualitySettings.SetQualityLevel(3, true);
-        }
-        else
-        {
-            QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("QualitySettings") - 1, true);
-        }
-
-        if (PlayerPrefs.GetFloat("Sensitivity") == 0.0f)
-        {
-            menuGUI.sensitivity.value = 1.0f;
-            PlayerPrefs.SetFloat("Sensitivity", 1.0f);
-        }
-        else
-        {
-            menuGUI.sensitivity.value = PlayerPrefs.GetFloat("Sensitivity");
-        }
-
-
-        switch (PlayerPrefs.GetString("ControlMode"))
-        {
-            case "":
-                menuGUI.ButtonMode.isOn = true;
-                break;
-            case "Buttons":
-                menuGUI.ButtonMode.isOn = true;
-                break;
-            case "Accel":
-                menuGUI.AccelMode.isOn = true;
-                break;
-        }
-
-
-        currentLevelNumber = PlayerPrefs.GetInt("CurrentLevelNumber");
-
-        for (int lvls = 0; lvls < levelSetting.Length; lvls++)
-        {
-            if (lvls <= PlayerPrefs.GetInt("CurrentLevelUnlocked"))
-                levelSetting[lvls].locked = false;
-
-        }
-
-
-        currentLevel(currentLevelNumber);
-
-
-        switch (PlayerPrefs.GetString("ControlMode"))
-        {
-            case "":
-                PlayerPrefs.SetString("ControlMode", "Buttons");
-                menuGUI.ButtonMode.isOn = true;
-                break;
-            case "Buttons":
-                menuGUI.ButtonMode.isOn = true;
-                break;
-            case "Accel":
-                menuGUI.AccelMode.isOn = true;
-                break;
-        }
-
-
-        PlayerPrefs.SetInt("BoughtVehicle0", 1);
-
-
-        //audio and music Toggle
-        menuGUI.audio.isOn = (PlayerPrefs.GetInt("AudioActive") == 0) ? true : false;
-        AudioListener.volume = (PlayerPrefs.GetInt("AudioActive") == 0) ? 1.0f : 0.0f;
-
-        menuGUI.music.isOn = (PlayerPrefs.GetInt("MusicActive") == 0) ? true : false;
-        menuMusic.mute = (PlayerPrefs.GetInt("MusicActive") == 0) ? false : true;
-
-        currentVehicleNumber = PlayerPrefs.GetInt("CurrentVehicle");
-        currentVehicle = vehicleSetting[currentVehicleNumber];
-
-
-        int i = 0;
-
-        foreach (VehicleSetting VSetting in vehicleSetting)
-        {
-
-            if (PlayerPrefsX.GetColor("VehicleWheelsColor" + i) == Color.clear)
-            {
-                vehicleSetting[i].ringMat.SetColor("_DiffuseColor", Color.white);
-            }
-            else
-            {
-                vehicleSetting[i].ringMat.SetColor("_DiffuseColor", PlayerPrefsX.GetColor("VehicleWheelsColor" + i));
-            }
-
-
-
-            if (PlayerPrefsX.GetColor("VehicleSmokeColor" + i) == Color.clear)
-            {
-                vehicleSetting[i].smokeMat.SetColor("_TintColor", new Color(0.8f, 0.8f, 0.8f, 0.2f));
-            }
-            else
-            {
-                vehicleSetting[i].smokeMat.SetColor("_TintColor", PlayerPrefsX.GetColor("VehicleSmokeColor" + i));
-            }
-
-
-
-            if (PlayerPrefs.GetInt("BoughtVehicle" + i.ToString()) == 1)
-            {
-                VSetting.Bought = true;
-
-                if (PlayerPrefs.GetInt("GameScore") == 0)
-                {
-                    PlayerPrefs.SetInt("GameScore", gameScore);
-                }
-                else
-                {
-                    gameScore = PlayerPrefs.GetInt("GameScore");
-                }
-            }
-
-
-            if (VSetting == vehicleSetting[currentVehicleNumber])
-            {
-                VSetting.vehicle.SetActive(true);
-                currentVehicle = VSetting;
-            }
-            else
-            {
-                VSetting.vehicle.SetActive(false);
-            }
-
-            i++;
-        }
-    }
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    void Update()
-    {
-        if (sceneLoadingOperation != null)
-        {
-            menuGUI.loadingBar.fillAmount = Mathf.MoveTowards(menuGUI.loadingBar.fillAmount, sceneLoadingOperation.progress + 0.2f, Time.deltaTime * 0.5f);
-
-            if (menuGUI.loadingBar.fillAmount > sceneLoadingOperation.progress)
-                sceneLoadingOperation.allowSceneActivation = true;
-        }
-
-
-        if (menuGUI.smokeColor.gameObject.activeSelf || randomColorActive)
-        {
-            vehicleSetting[currentVehicleNumber].rearWheels.Rotate(1000 * Time.deltaTime, 0, 0);
-            vehicleSetting[currentVehicleNumber].wheelSmokes.SetActive(true);
-        }
-        else
-        {
-            vehicleSetting[currentVehicleNumber].wheelSmokes.SetActive(false);
-        }
-
-
-        menuGUI.VehicleSpeed.value = vehicleSetting[currentVehicleNumber].vehiclePower.speed / 100.0f;
-        menuGUI.VehicleBraking.value = vehicleSetting[currentVehicleNumber].vehiclePower.braking / 100.0f;
-        menuGUI.VehicleNitro.value = vehicleSetting[currentVehicleNumber].vehiclePower.nitro / 100.0f;
-        menuGUI.GameScore.text = gameScore.ToString();
-
-
-        if (vehicleSetting[currentVehicleNumber].Bought)
-        {
-            menuGUI.customizeVehicle.SetActive(true);
-            menuGUI.buyNewVehicle.SetActive(false);
-
-            menuGUI.VehicleName.text = vehicleSetting[currentVehicleNumber].name;
-            menuGUI.VehiclePrice.text = "BOUGHT";
-            PlayerPrefs.SetInt("CurrentVehicle", currentVehicleNumber);
-        }
-        else
-        {
-            menuGUI.customizeVehicle.SetActive(false);
-            menuGUI.buyNewVehicle.SetActive(true);
-
-            menuGUI.VehicleName.text = vehicleSetting[currentVehicleNumber].name;
-            menuGUI.VehiclePrice.text = "COST: " + vehicleSetting[currentVehicleNumber].price.ToString();
-        }
-
-
-
-#if UNITY_STANDALONE || UNITY_WEBGL || UNITY_EDITOR
-
-        if (Input.GetMouseButton(0) && activePanel != Panels.SelectLevel)
-        {
-            x = Mathf.Lerp(x, Mathf.Clamp(Input.GetAxis("Mouse X"), -2, 2) * cameraRotateSpeed, Time.deltaTime * 5.0f);
-            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 50, 60);
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 50, Time.deltaTime);
-        }
-        else {
-            x = Mathf.Lerp(x, cameraRotateSpeed * 0.01f, Time.deltaTime * 5.0f);
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, Time.deltaTime);
-        }
-
-
-#elif UNITY_ANDROID||UNITY_IOS
-
-
-
-        if (Input.touchCount == 1&& activePanel!=Panels.SelectLevel)
-        {
-            switch (Input.GetTouch(0).phase)
-            {
-                case TouchPhase.Moved:
-                    x = Mathf.Lerp(x, Mathf.Clamp(Input.GetTouch(0).deltaPosition.x, -2, 2) * cameraRotateSpeed, Time.deltaTime*3.0f);
-                    Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 50, 60);
-                    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 50, Time.deltaTime);
-                    break;
-            }
-
-        }
-        else {
-            x = Mathf.Lerp(x, cameraRotateSpeed * 0.02f, Time.deltaTime*3.0f);
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60, Time.deltaTime);
-        }
-
-#endif
-
-        transform.RotateAround(vehicleRoot.position, Vector3.up, x);
-
-
     }
 
 }

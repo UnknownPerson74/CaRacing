@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\GUI\FormatSecondsScript.cs" />
     <Compile Include="Assets\Scripts\Vehicle\GizmoObject.cs" />
     <Compile Include="Assets\Other\Skidmarks\WheelSkidmarks.cs" />
+    <Compile Include="Assets\Scripts\GUI\UICarUpgradeItem.cs" />
     <Compile Include="Assets\Scripts\GUI\MobileControl.cs" />
     <Compile Include="Assets\Other\Skidmarks\Skidmarks Essentials\Skidmarks.cs" />
     <Compile Include="Assets\Scripts\AIController\AIVehicle.cs" />
