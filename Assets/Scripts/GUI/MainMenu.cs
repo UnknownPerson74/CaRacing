@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -165,6 +167,7 @@ public class MainMenu : MonoBehaviour
     void Awake()
     {
 
+
         AudioListener.pause = false;
         Time.timeScale = 1.0f;
 
@@ -239,7 +242,6 @@ public class MainMenu : MonoBehaviour
 
         PlayerPrefs.SetInt("BoughtVehicle0", 1);
 
-        SaveGameData();
         //audio and music Toggle
         menuGUI.audio.isOn = (PlayerPrefs.GetInt("AudioActive") == 0) ? true : false;
         AudioListener.volume = (PlayerPrefs.GetInt("AudioActive") == 0) ? 1.0f : 0.0f;
@@ -249,6 +251,7 @@ public class MainMenu : MonoBehaviour
 
         currentVehicleNumber = PlayerPrefs.GetInt("CurrentVehicle");
         currentVehicle = vehicleSetting[currentVehicleNumber];
+        Load();
 
         int i = 0;
 
@@ -304,27 +307,27 @@ public class MainMenu : MonoBehaviour
 
             i++;
         }
-        Load();
 
     }
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private void OnApplicationPause(bool paused)
+    private void Start()
     {
-        Screen.sleepTimeout = ((!paused) ? -1 : -2);
-        if (paused)
+        Application.targetFrameRate = 60;
+        Screen.sleepTimeout = -1;
+    }
+    private void OnApplicationPause(bool pause)
+    {
+        Screen.sleepTimeout = ((!pause) ? -1 : -2);
+        if (pause)
         {
             SaveGameData();
         }
 
         else
         {
-            Load();
         }
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void SaveGameData()
     {
@@ -341,7 +344,7 @@ public class MainMenu : MonoBehaviour
     {
         for (int i = 0; i < vehicleSetting.Length; i++)
         {
-            string str = vehicleSetting[i].name.ToString();
+            string str = i.ToString();
             vehicleSetting[i].vehiclePower.speed = PlayerPrefs.GetInt(str + "_CURRENT_SPEED", vehicleSetting[i].vehiclePower.speed);
             vehicleSetting[i].vehiclePower.braking = PlayerPrefs.GetInt(str + "_CURRENT_BRAKING", vehicleSetting[i].vehiclePower.braking);
             vehicleSetting[i].vehiclePower.nitro = PlayerPrefs.GetInt(str + "_CURRENT_NITRO", vehicleSetting[i].vehiclePower.nitro);
@@ -377,6 +380,7 @@ public class MainMenu : MonoBehaviour
             if (menuGUI.loadingBar.fillAmount > sceneLoadingOperation.progress)
                 sceneLoadingOperation.allowSceneActivation = true;
         }
+        Load();
 
 
         if (menuGUI.smokeColor.gameObject.activeSelf || randomColorActive)
