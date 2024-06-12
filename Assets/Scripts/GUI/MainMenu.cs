@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,7 +19,7 @@ public class MainMenu : MonoBehaviour
         {
             if (instance == null)
             {
-               instance = new MainMenu();
+                instance = new MainMenu();
             }
             return MainMenu.instance;
         }
@@ -51,7 +49,7 @@ public class MainMenu : MonoBehaviour
         set
         {
             this._coins = value;
-           UpdateCoinsCount();
+            UpdateCoinsCount();
         }
     }
 
@@ -113,12 +111,12 @@ public class MainMenu : MonoBehaviour
         [System.Serializable]
         public class VehiclePower
         {
-            public float speed = 80;
-            public float braking = 1000;
-            public float nitro = 10;
-            public float Maxspeed = 80;
-            public float Maxbraking = 1000;
-            public float Maxnitro = 10;
+            public int speed = 80;
+            public int braking = 1000;
+            public int nitro = 10;
+            public int Maxspeed = 80;
+            public int Maxbraking = 1000;
+            public int Maxnitro = 10;
         }
     }
 
@@ -162,7 +160,7 @@ public class MainMenu : MonoBehaviour
     public void UpdateCoinsCount()
     {
         string valueFormated = UICarUpgradeItem.GetValueFormated(Coins);
-            menuGUI.GameScore.text = valueFormated;
+        menuGUI.GameScore.text = valueFormated;
     }
     void Awake()
     {
@@ -173,7 +171,6 @@ public class MainMenu : MonoBehaviour
 
         menuGUI.vibrateToggle.isOn = (PlayerPrefs.GetInt("VibrationActive") == 0) ? true : false;
         this.UICarUpgradeItems = menuGUI.Upgrade.GetComponentsInChildren<UICarUpgradeItem>();
-
 
         CurrentPanel(0);
 
@@ -307,8 +304,25 @@ public class MainMenu : MonoBehaviour
 
             i++;
         }
+        Load();
+
     }
 
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void OnApplicationPause(bool paused)
+    {
+        Screen.sleepTimeout = ((!paused) ? -1 : -2);
+        if (paused)
+        {
+            SaveGameData();
+        }
+
+        else
+        {
+            Load();
+        }
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -322,6 +336,37 @@ public class MainMenu : MonoBehaviour
         //    PlayerPrefs.SetFloat(str + "_CURRENT_NITRO", vehicleSetting[i].vehiclePower.nitro);
         //}
         //PlayerPrefs.Save();
+    }
+    public void Load()
+    {
+        for (int i = 0; i < vehicleSetting.Length; i++)
+        {
+            string str = vehicleSetting[i].name.ToString();
+            vehicleSetting[i].vehiclePower.speed = PlayerPrefs.GetInt(str + "_CURRENT_SPEED", vehicleSetting[i].vehiclePower.speed);
+            vehicleSetting[i].vehiclePower.braking = PlayerPrefs.GetInt(str + "_CURRENT_BRAKING", vehicleSetting[i].vehiclePower.braking);
+            vehicleSetting[i].vehiclePower.nitro = PlayerPrefs.GetInt(str + "_CURRENT_NITRO", vehicleSetting[i].vehiclePower.nitro);
+        }
+
+        menuGUI.VehicleSpeed.value = vehicleSetting[currentVehicleNumber].vehiclePower.speed / 100.0f; ;
+        menuGUI.VehicleBraking.value = vehicleSetting[currentVehicleNumber].vehiclePower.braking / 100.0f; ;
+        menuGUI.VehicleNitro.value = vehicleSetting[currentVehicleNumber].vehiclePower.nitro / 100.0f; ;
+        menuGUI.GameScore.text = Coins.ToString();
+
+
+        this.UICarUpgradeItems[0].SetProgress(vehicleSetting[currentVehicleNumber].vehiclePower.speed, vehicleSetting[currentVehicleNumber].vehiclePower.Maxspeed);
+        this.UICarUpgradeItems[1].SetProgress(vehicleSetting[currentVehicleNumber].vehiclePower.braking, vehicleSetting[currentVehicleNumber].vehiclePower.Maxbraking);
+        this.UICarUpgradeItems[2].SetProgress(vehicleSetting[currentVehicleNumber].vehiclePower.nitro, vehicleSetting[currentVehicleNumber].vehiclePower.Maxnitro);
+
+        //this.worldLockStatus = PlayerPrefz.GetBoolArray("WORLD_LOCKED_", false, Configurations.Instance.WorldCount);
+        //this.gameModeScores = PlayerPrefz.GetIntArray("GAME_MODE_SCORES", 0, 3);
+        //for (int j = 0; j < this.worldLockStatus.Length; j++)
+        //{
+        //    this.worldLockStatus[j] = (Configurations.Instance.worldInfo[j].coinsNeededToUnlock > 0);
+        //}
+        //this.Coins = PlayerPrefs.GetInt("_COINS_", 10000);
+        //this.TicketSpin = PlayerPrefs.GetInt("SPIN_TICKETS", 2);
+        //this.LevelProgress = PlayerPrefs.GetFloat("P4PROGRESS", 15f);
+        //this.Level = PlayerPrefs.GetInt("P4LEVEL", 1);
     }
     void Update()
     {
@@ -344,16 +389,6 @@ public class MainMenu : MonoBehaviour
             vehicleSetting[currentVehicleNumber].wheelSmokes.SetActive(false);
         }
 
-
-        menuGUI.VehicleSpeed.value = PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_SPEED") / 100.0f; ;
-        menuGUI.VehicleBraking.value = PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_BRAKING") / 100.0f; ;
-        menuGUI.VehicleNitro.value = PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_NITRO") / 100.0f; ;
-        menuGUI.GameScore.text = Coins.ToString();
-
-
-        this.UICarUpgradeItems[0].SetProgress(PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_SPEED"), vehicleSetting[currentVehicleNumber].vehiclePower.Maxspeed);
-        this.UICarUpgradeItems[1].SetProgress(PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_BRAKING"), vehicleSetting[currentVehicleNumber].vehiclePower.Maxbraking);
-        this.UICarUpgradeItems[2].SetProgress(PlayerPrefs.GetFloat(currentVehicleNumber + "_CURRENT_NITRO"), vehicleSetting[currentVehicleNumber].vehiclePower.Maxnitro);
 
         if (vehicleSetting[currentVehicleNumber].Bought)
         {
@@ -414,22 +449,22 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void SetCarUpgradeValue(int upgradeID, float val)
+    public void SetCarUpgradeValue(int upgradeID, int val)
     {
         switch (upgradeID)
         {
             case 0:
                 this.vehicleSetting[currentVehicleNumber].vehiclePower.speed = val;
-                PlayerPrefs.SetFloat(currentVehicleNumber + "_CURRENT_SPEED", val);
+                PlayerPrefs.SetInt(currentVehicleNumber + "_CURRENT_SPEED", val);
                 break;
 
             case 1:
                 this.vehicleSetting[currentVehicleNumber].vehiclePower.braking = val;
-                PlayerPrefs.SetFloat(currentVehicleNumber + "_CURRENT_BRAKING", val);
+                PlayerPrefs.SetInt(currentVehicleNumber + "_CURRENT_BRAKING", val);
                 break;
             case 2:
                 this.vehicleSetting[currentVehicleNumber].vehiclePower.nitro = val;
-                PlayerPrefs.SetFloat(currentVehicleNumber + "_CURRENT_NITRO", val);
+                PlayerPrefs.SetInt(currentVehicleNumber + "_CURRENT_NITRO", val);
                 break;
 
         }

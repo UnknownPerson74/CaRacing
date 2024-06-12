@@ -13,7 +13,7 @@ public class UICarUpgradeItem : MonoBehaviour
 
     }
 
-    public float CurrentProgress
+    public int CurrentProgress
 	{
 		get
 		{
@@ -31,7 +31,7 @@ public class UICarUpgradeItem : MonoBehaviour
     {
         return string.Format("{0:n0}", val);
     }
-    public void SetProgress(float value, float max)
+    public void SetProgress(int value, float max)
 	{
 		this.max_progress = max;
 		this.CurrentProgress = value;
@@ -69,7 +69,7 @@ public class UICarUpgradeItem : MonoBehaviour
 
 	private int _id;
 
-	private float _currProgress;
+	private int _currProgress;
 
 	private float max_progress;
 

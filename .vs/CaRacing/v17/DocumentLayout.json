@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gui\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|c:\\users\\ahsan\\downloads\\caracing\\caracing\\assets\\scripts\\gui\\uicarupgradeitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\assets\\scripts\\gui\\uicarupgradeitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4BA994B9-0CD4-841D-98F8-2356F99495CE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gui\\uicarupgradeitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -28,7 +28,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\GUI\\UICarUpgradeItem.cs",
               "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\GUI\\UICarUpgradeItem.cs",
               "RelativeToolTip": "Assets\\Scripts\\GUI\\UICarUpgradeItem.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAvwCcAAAAAAAAA",
+              "ViewState": "AQIAAB0AAAAAAAAAAIA7wEcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-09T15:22:06.081Z",
               "EditorCaption": ""
@@ -41,7 +41,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\GUI\\MainMenu.cs",
               "ToolTip": "C:\\Users\\Ahsan\\Downloads\\CaRacing\\CaRacing\\Assets\\Scripts\\GUI\\MainMenu.cs",
               "RelativeToolTip": "Assets\\Scripts\\GUI\\MainMenu.cs",
-              "ViewState": "AQIAAEMBAAAAAAAAAAAawFsBAAAAAAAA",
+              "ViewState": "AQIAACkBAAAAAAAAAAAvwDMBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-02T21:26:10.867Z",
               "EditorCaption": ""
